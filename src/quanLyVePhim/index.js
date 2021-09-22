@@ -9,7 +9,7 @@ export default class BookingTicket extends Component {
     return data.map((hangGhe, index) => {
       return (
         <div key={index}>
-          <HangGhe hangGhe={hangGhe} />
+          <HangGhe hangGhe={hangGhe} soHangGhe={index} />
         </div>
       );
     });

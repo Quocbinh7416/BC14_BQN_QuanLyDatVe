@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { huyGheAction } from "../redux/actions/datVeAction";
 
-export default class ThongTinDatGhe extends Component {
+class ThongTinDatGhe extends Component {
   render() {
     return (
       <div className="text-left">
@@ -29,10 +31,50 @@ export default class ThongTinDatGhe extends Component {
                 <th>Huỷ</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+              {this.props.danhSachGheDangDat.map((gheDangDat) => {
+                console.log(gheDangDat);
+                return (
+                  <tr key={gheDangDat.soGhe} className="text-warning">
+                    <td>{gheDangDat.soGhe}</td>
+                    <td>{gheDangDat.gia}</td>
+                    <td>
+                      <button
+                        onClick={() => {
+                          this.props.dispatch(huyGheAction(gheDangDat.soGhe));
+                        }}
+                      >
+                        Huỷ
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot>
+              <tr className="text-warning">
+                <td></td>
+                <td>Tổng tiền</td>
+                <td>
+                  {this.props.danhSachGheDangDat
+                    .reduce((tongTien, gheDangDat, index) => {
+                      return (tongTien += gheDangDat.gia);
+                    }, 0)
+                    .toLocaleString()}
+                </td>
+              </tr>
+            </tfoot>
           </table>
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    danhSachGheDangDat: state.BaiTapDatVeReducer.danhSachGheDangDat,
+  };
+};
+
+export default connect(mapStateToProps)(ThongTinDatGhe);

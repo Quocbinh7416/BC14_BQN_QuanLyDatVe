@@ -5,7 +5,7 @@
 
 .bookingMovie {
   /* font-family: "fontGame"; */
-  /* position: fixed; */
+  position: fixed;
   background-image: url(./assets/bgmovie.jpg);
   background-size: 100%;
   width: 100%;
@@ -32,7 +32,7 @@
   height: 35px;
   background: none;
   border: none;
-  margin-left: 2%;
+  margin-left: 2.2%;
   margin-bottom: 1%;
   font-size: 30px;
   color: yellow;
